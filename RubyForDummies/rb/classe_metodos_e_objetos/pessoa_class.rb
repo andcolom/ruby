@@ -11,6 +11,7 @@ end
 p = Pessoa.new
 p.fala
 puts p.troca "calca"
+p.send :fala
 
 class Pessoa
   def meu_time(time)
