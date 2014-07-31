@@ -11,35 +11,32 @@ require "./Jokenpo"
 
 class JokenpoTest < Test::Unit::TestCase
   
+  def setup
+    @jokenpo = Jokenpo.new
+  end
     
   def test_pedra_com_pedra_empata    
-    j = Jokenpo.new
-    assert_equal( 0 , j.jogar(j.jogadas[:pedra],j.jogadas[:pedra]) )
+    assert_equal( 0 , @jokenpo.jogar(@jokenpo.jogadas[:pedra],@jokenpo.jogadas[:pedra]) )
   end
 
   def test_pedra_ganha_tesoura
-    j = Jokenpo.new
-    assert_equal( 1, j.jogar(j.jogadas[:pedra], j.jogadas[:tesoura]))
+    assert_equal( 1, @jokenpo.jogar(@jokenpo.jogadas[:pedra], @jokenpo.jogadas[:tesoura]))
   end
 
   def test_tesoura_com_tesoura_empata
-    j = Jokenpo.new
-    assert_equal( 0 , j.jogar(j.jogadas[:tesoura],j.jogadas[:tesoura]) )
+    assert_equal( 0 , @jokenpo.jogar(@jokenpo.jogadas[:tesoura],@jokenpo.jogadas[:tesoura]) )
   end
 
   def test_tesoura_ganha_papel
-    j = Jokenpo.new
-    assert_equal( 1, j.jogar(j.jogadas[:tesoura], j.jogadas[:papel]))
+    assert_equal( 1, @jokenpo.jogar(@jokenpo.jogadas[:tesoura], @jokenpo.jogadas[:papel]))
   end
 
   def test_papel_empata_papel
-    j = Jokenpo.new
-    assert_equal( 0 , j.jogar(j.jogadas[:papel],j.jogadas[:papel]) )
+    assert_equal( 0 , @jokenpo.jogar(@jokenpo.jogadas[:papel],@jokenpo.jogadas[:papel]) )
   end
 
   def test_papel_ganha_pedra
-    j = Jokenpo.new
-    assert_equal(1, j.jogar(j.jogadas[:papel], j.jogadas[:pedra]))
+    assert_equal(1, @jokenpo.jogar(@jokenpo.jogadas[:papel], @jokenpo.jogadas[:pedra]))
   end
 
 end
