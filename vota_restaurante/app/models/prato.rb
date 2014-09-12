@@ -4,7 +4,7 @@ class Prato < ActiveRecord::Base
   has_one :receita
 
   validates_presence_of :nome, message: " - deve ser preenchido"
-  validates_uniqueness_of :nome, message: " - nome já cadastrado"
+  validates_uniqueness_of :nome, message: " - nome ja cadastrado"
 
   validate :validate_presence_of_more_than_one_restaurante
   

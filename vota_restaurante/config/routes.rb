@@ -53,4 +53,12 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  resources :restaurantes
+  
+  VotaRestaurante::Application.routes.draw do
+    match 'ola' => 'ola_mundo#index', via: 'get'    
+  end
+  
+  
+  
 end
