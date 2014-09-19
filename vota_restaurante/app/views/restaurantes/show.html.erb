@@ -1,4 +1,4 @@
-<h1>Exibindo Restaurante</h1>
+<h1>Dados de Restaurante</h1>
 
 <p>
 	<b>ID: </b>
@@ -18,6 +18,14 @@
 <p>
 	<b>Especialidade: </b>
 	<%= @restaurante.especialidade %>
+</p>
+
+<p>
+	<%= link_to 'Voltar', action: 'index' %>
+</p>
+
+<p>
+	<%= link_to 'Qualificar restaurante', controller: "qualificacoes", action: "new", restaurante: @restaurante %>
 </p>
 
 

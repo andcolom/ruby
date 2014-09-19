@@ -1,0 +1,91 @@
+class QualificacoesController < ApplicationController
+  before_action :set_qualificacao, only: [:show, :edit, :update, :destroy]
+  # GET /qualificacoes
+  # GET /qualificacoes.json
+  def index
+    @qualificacoes = Qualificacao.all
+  end
+
+  # GET /qualificacoes/1
+  # GET /qualificacoes/1.json
+  def show
+  end
+
+  # GET /qualificacoes/new
+  def new
+    @qualificacao = Qualificacao.new
+    parametros_formulario
+    if params[:cliente]
+      @qualificacao.cliente = Cliente.find params[:cliente]
+    end
+    if params[:restaurante]
+      @qualificacao.restaurante = Restaurante.find params[:restaurante]
+    end
+      
+  end
+
+  # GET /qualificacoes/1/edit
+  def edit
+    parametros_formulario
+  end
+
+  # POST /qualificacoes
+  # POST /qualificacoes.json
+  def create
+    @qualificacao = Qualificacao.new(qualificacao_params)
+
+    respond_to do |format|
+      if @qualificacao.save
+        format.html { redirect_to @qualificacao, notice: 'Qualificacao efetuada com sucesso.' }
+        format.json { render :show, status: :created, location: @qualificacao }
+      else
+        parametros_formulario
+        format.html { render :new }
+        format.json { render json: @qualificacao.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /qualificacoes/1
+  # PATCH/PUT /qualificacoes/1.json
+  def update
+    respond_to do |format|
+      if @qualificacao.update(qualificacao_params)
+        format.html { redirect_to @qualificacao, notice: 'Qualificacao alterada com sucesso.' }
+        format.json { render :show, status: :ok, location: @qualificacao }
+      else
+        parametros_formulario
+        format.html { render :edit }
+        format.json { render json: @qualificacao.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /qualificacoes/1
+  # DELETE /qualificacoes/1.json
+  def destroy
+    @qualificacao.destroy
+    respond_to do |format|
+      format.html { redirect_to qualificacoes_url, notice: 'Qualificacao foi excluida com sucesso.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_qualificacao
+    @qualificacao = Qualificacao.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def qualificacao_params
+    params.require(:qualificacao).permit(:cliente_id, :restaurante_id, :nota, :valor_gasto)
+  end
+
+  def parametros_formulario
+    @clientes = Cliente.order :nome
+    @restaurantes = Restaurante.order :nome
+  end
+
+end

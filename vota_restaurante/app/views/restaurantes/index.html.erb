@@ -1,8 +1,6 @@
 <h1>Listagem de restaurantes</h1>
 
-<%= link_to "Novo Restaurante", action: 'new'%>
-
-<br/>
+<%= link_to "Novo Restaurante", action: 'new'%></br></br>
 
 <table>
 	<tr>
@@ -18,7 +16,8 @@
 		<td><%= r.endereco %></td>
 		<td><%= r.especialidade %></td>
 		<td> <%= link_to 'Exibir', action: 'show', id: r %> </td>
-		<td> <%= link_to 'Excluir', {action: 'destroy', id: r},{method: "delete"}%> </td>
+		<td> <%= link_to 'Editar', action: 'edit', id: r %> </td>		
+		<td><%= link_to 'Excluir', r, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
 	</tr>
 	<% end %>
 </table>

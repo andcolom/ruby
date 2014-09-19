@@ -1,15 +1,22 @@
 class RestaurantesController < ApplicationController
   
-  def restaurante_params
-    params.require(:restaurante).permit(:nome, :endereco, :especialidade)
-  end
   
   def index
     @restaurantes = Restaurante.order :id
+    respond_to do |format|
+      format.html
+      format.xml {render xml: @restaurantes}
+      format.json {render json: @restaurantes}
+    end
   end
   
   def show
     @restaurante = Restaurante.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.xml {render xml: @restaurante}
+      format.json {render json: @restaurante}
+    end
   end
   
   def destroy
@@ -24,8 +31,34 @@ class RestaurantesController < ApplicationController
 
   def create
     @restaurante = Restaurante.new restaurante_params
-    @restaurante.save
-    redirect_to action: 'index'
+    if @restaurante.save      
+      respond_to do |format|
+        format.html { redirect_to @restaurante}
+      end
+    else
+      render action: "new"
+    end  
+    
   end
+  
+  def edit
+    @restaurante = Restaurante.find params[:id]
+  end
+  
+  def update
+    @restaurante = Restaurante.find params[:id]
+    if @restaurante.update_attributes restaurante_params
+      redirect_to action: "show", id: @restaurante      
+    else
+      render action: "edit"
+    end
+    
+  end
+  
+  private
+   def restaurante_params
+    params.require(:restaurante).permit(:nome, :endereco, :especialidade)
+  end
+ 
 
 end
